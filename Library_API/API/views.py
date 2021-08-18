@@ -4,8 +4,6 @@ from .serializers import (
     AuthorSerializer,
     BookSerializer,
     OrderSerializer,
-    UserSerializer,
-    User
     )
 
 from rest_framework.authentication import TokenAuthentication
@@ -13,19 +11,20 @@ from rest_framework.authentication import TokenAuthentication
 
 class AuthorViewSet(viewsets.ModelViewSet):
     serializer_class = AuthorSerializer
+    permission_classes = [permissions.AllowAny,]
     queryset = Author.objects.all()
     authentication_classes = (TokenAuthentication,)
 
 
 class BookViewSet(viewsets.ModelViewSet):
     serializer_class = BookSerializer
+    permission_classes = [permissions.AllowAny, ]
     queryset = Book.objects.all()
     authentication_classes = (TokenAuthentication,)
 
 
 class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
-    #queryset = Order.objects.all()
     authentication_classes = (TokenAuthentication,)
 
     def perform_create(self, serializer):
@@ -35,9 +34,3 @@ class OrderViewSet(viewsets.ModelViewSet):
         user = self.request.user
 
         return Order.objects.filter(user=user)
-
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    permission_classes = [permissions.AllowAny, ]
-    serializer_class = UserSerializer

@@ -38,9 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'API',
+    'Authentication',
     'rest_framework',
     'rest_framework.authtoken',
 ]
+
+AUTH_USER_MODEL = 'Authentication.CustomUser'
 
 
 REST_FRAMEWORK = {

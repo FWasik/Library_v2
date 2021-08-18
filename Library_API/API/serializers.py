@@ -41,23 +41,3 @@ class OrderSerializer(serializers.ModelSerializer):
 
         return response
 
-
-
-
-class UserSerializer(serializers.ModelSerializer):
-
-    email = serializers.CharField(required=True,
-                                  max_length=50)
-
-    def create(self, validated_data):
-        user = User.objects.create_user(
-            username=validated_data['username'],
-            email=validated_data['email'],
-            password=validated_data['password']
-        )
-
-        return user
-
-    class Meta:
-        model = User
-        fields = '__all__'
