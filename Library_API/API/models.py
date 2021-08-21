@@ -29,6 +29,7 @@ class Book(models.Model):
     title = models.CharField(max_length=100)
     summary = models.TextField(max_length=1500, null=True, blank=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    amount = models.IntegerField(default=5)
 
     def __str__(self):
         return self.title
@@ -37,5 +38,4 @@ class Book(models.Model):
 class Order(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-
 

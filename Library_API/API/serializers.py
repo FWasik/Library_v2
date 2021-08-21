@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import Order, Book, Author
-from django.contrib.auth.models import User
 
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -22,11 +21,6 @@ class BookSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    '''user = serializers.PrimaryKeyRelatedField(
-        read_only=True,
-        default=serializers.CurrentUserDefault()
-    )'''
-
     user = serializers.PrimaryKeyRelatedField(
         read_only=True,
     )
