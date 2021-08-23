@@ -36,6 +36,6 @@ class Book(models.Model):
 
 
 class Order(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    book = models.ManyToManyField(Book)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 

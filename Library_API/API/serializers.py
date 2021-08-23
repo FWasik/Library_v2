@@ -9,15 +9,11 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
+    author = AuthorSerializer(read_only=True)
 
     class Meta:
         model = Book
         fields = '__all__'
-
-    def to_representation(self, instance):
-        response = super().to_representation(instance)
-        response['author'] = AuthorSerializer(instance.author).data
-        return response
 
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -31,7 +27,18 @@ class OrderSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
-        response['book'] = BookSerializer(instance.book).data
-
+        response['book'] = BookSerializer(instance.book.all(), many=True).data
         return response
 
+    def validate(self, data):
+        for book_in_order in data['book']:
+            book = Book.objects.get(pk=book_in_order.id)
+
+            if book.amount > 0:
+                book.amount -= 1
+                book.save()
+
+            else:
+                raise serializers.ValidationError('Not enough books in library. Try again later.')
+
+        return data
