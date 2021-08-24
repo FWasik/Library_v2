@@ -7,24 +7,28 @@ from .serializers import (
     )
 
 
-from rest_framework.authentication import TokenAuthentication
-
-
 class AuthorViewSet(viewsets.ModelViewSet):
     serializer_class = AuthorSerializer
-    permission_classes = [permissions.AllowAny,]
     queryset = Author.objects.all()
+
+    def get_permissions(self):
+        if self.request.method in ['POST', "DELETE"]:
+            return [permissions.IsAdminUser()]
+        return [permissions.AllowAny()]
 
 
 class BookViewSet(viewsets.ModelViewSet):
     serializer_class = BookSerializer
-    permission_classes = [permissions.AllowAny, ]
     queryset = Book.objects.all()
+
+    def get_permissions(self):
+        if self.request.method in ['POST', "DELETE"]:
+            return [permissions.IsAdminUser()]
+        return [permissions.AllowAny()]
 
 
 class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
-    authentication_classes = (TokenAuthentication,)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

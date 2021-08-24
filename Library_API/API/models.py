@@ -28,7 +28,7 @@ class Author(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=100)
     summary = models.TextField(max_length=1500, null=True, blank=True)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    author = models.ManyToManyField(Author)
     amount = models.IntegerField(default=5)
 
     def __str__(self):

@@ -9,11 +9,15 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
-    author = AuthorSerializer(read_only=True)
 
     class Meta:
         model = Book
         fields = '__all__'
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response['author'] = AuthorSerializer(instance.author.all(), many=True).data
+        return response
 
 
 class OrderSerializer(serializers.ModelSerializer):
