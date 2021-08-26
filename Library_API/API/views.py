@@ -12,7 +12,7 @@ class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
 
     def get_permissions(self):
-        if self.request.method in ['POST', "DELETE"]:
+        if self.request.method in ['POST', 'DELETE', 'PATCH', 'PUT']:
             return [permissions.IsAdminUser()]
         return [permissions.AllowAny()]
 
@@ -22,7 +22,7 @@ class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
 
     def get_permissions(self):
-        if self.request.method in ['POST', "DELETE"]:
+        if self.request.method in ['POST', 'DELETE', 'PATCH', 'PUT']:
             return [permissions.IsAdminUser()]
         return [permissions.AllowAny()]
 
