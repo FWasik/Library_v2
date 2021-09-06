@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Author, Book, Order
+from .models import Author, Book, Order, Publisher, Genre, Deliverer
 
 
 class IdShowAdmin(admin.ModelAdmin):
@@ -9,3 +9,7 @@ class IdShowAdmin(admin.ModelAdmin):
 admin.site.register(Author, IdShowAdmin)
 admin.site.register(Book, IdShowAdmin)
 admin.site.register(Order)
+admin.site.register(Deliverer, IdShowAdmin)
+admin.site.register(Genre, IdShowAdmin)
+admin.site.register(Publisher, IdShowAdmin)
+
