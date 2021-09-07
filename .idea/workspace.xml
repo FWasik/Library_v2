@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3d5e61e9-ceb4-466d-8191-8c0a69a228c2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Library_v2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Library_v2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library_API/API/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Library_API/API/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library_API/API/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Library_API/API/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library_API/API/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Library_API/API/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library_API/API/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Library_API/API/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library_API/Authentication/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Library_API/Authentication/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library_API/Authentication/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Library_API/Authentication/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library_API/Authentication/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Library_API/Authentication/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library_API/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/Library_API/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,8 +92,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.main" />
       <item itemvalue="Python.manage" />
+      <item itemvalue="Python.main" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

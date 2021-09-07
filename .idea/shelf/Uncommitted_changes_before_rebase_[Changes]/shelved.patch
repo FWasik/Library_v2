@@ -1,0 +1,156 @@
+Index: Library_API/API/views.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from rest_framework import viewsets, permissions\r\nfrom .models import Author, Book, Order\r\nfrom .serializers import (\r\n    AuthorSerializer,\r\n    BookSerializer,\r\n    OrderSerializer,\r\n    )\r\n\r\n\r\nclass AuthorViewSet(viewsets.ModelViewSet):\r\n    serializer_class = AuthorSerializer\r\n    queryset = Author.objects.all()\r\n\r\n    def get_permissions(self):\r\n        if self.request.method in ['POST', \"DELETE\"]:\r\n            return [permissions.IsAdminUser()]\r\n        return [permissions.AllowAny()]\r\n\r\n\r\nclass BookViewSet(viewsets.ModelViewSet):\r\n    serializer_class = BookSerializer\r\n    queryset = Book.objects.all()\r\n\r\n    def get_permissions(self):\r\n        if self.request.method in ['POST', \"DELETE\"]:\r\n            return [permissions.IsAdminUser()]\r\n        return [permissions.AllowAny()]\r\n\r\n\r\nclass OrderViewSet(viewsets.ModelViewSet):\r\n    serializer_class = OrderSerializer\r\n\r\n    def perform_create(self, serializer):\r\n        serializer.save(user=self.request.user)\r\n\r\n    def get_queryset(self):\r\n        user = self.request.user\r\n        return Order.objects.filter(user=user)\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Library_API/API/views.py b/Library_API/API/views.py
+--- a/Library_API/API/views.py	(revision bc94aaee8b943bddcded493d2dfd4f58a618b13e)
++++ b/Library_API/API/views.py	(date 1629809901408)
+@@ -12,7 +12,7 @@
+     queryset = Author.objects.all()
+ 
+     def get_permissions(self):
+-        if self.request.method in ['POST', "DELETE"]:
++        if self.request.method in ['POST', "DELETE", "UPDATE"]:
+             return [permissions.IsAdminUser()]
+         return [permissions.AllowAny()]
+ 
+@@ -22,7 +22,7 @@
+     queryset = Book.objects.all()
+ 
+     def get_permissions(self):
+-        if self.request.method in ['POST', "DELETE"]:
++        if self.request.method in ['POST', "DELETE", "UPDATE"]:
+             return [permissions.IsAdminUser()]
+         return [permissions.AllowAny()]
+ 
+Index: .idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>*.pyc\r\n*.db\r\n*~\r\n.*\r\n*.py.bak\r\ndb.*\r\n\r\n/site/\r\n/htmlcov/\r\n/coverage/\r\n/build/\r\n/dist/\r\n/*.egg-info/\r\n/env/\r\nMANIFEST\r\ncoverage.*\r\n.coverage\r\n\r\n\r\n# dependencies\r\nfrontend/node_modules\r\n/.pnp\r\n.pnp.js\r\n\r\n# testing\r\n/coverage\r\n\r\n\r\n# production\r\n/build\r\n\r\n# misc\r\n.DS_Store\r\n.env.local\r\n.env.development.local\r\n.env.test.local\r\n.env.production.local\r\n\r\nnpm-debug.log*\r\nyarn-debug.log*\r\nyarn-error.log*\r\n\r\n\r\n!.github\r\n!.gitignore\r\n!.pre-commit-config.yaml
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+--- a/.idea/.gitignore	(revision bc94aaee8b943bddcded493d2dfd4f58a618b13e)
++++ b/.idea/.gitignore	(date 1629738327538)
+@@ -1,46 +1,53 @@
+-*.pyc
+-*.db
+-*~
+-.*
+-*.py.bak
+-db.*
++# Byte-compiled / optimized / DLL files
++__pycache__/
++*.py[cod]
++
++# C extensions
++*.so
+ 
+-/site/
+-/htmlcov/
+-/coverage/
+-/build/
+-/dist/
+-/*.egg-info/
+-/env/
+-MANIFEST
+-coverage.*
++# Distribution / packaging
++.Python
++env/
++build/
++develop-eggs/
++dist/
++eggs/
++lib/
++lib64/
++parts/
++sdist/
++var/
++*.egg-info/
++.installed.cfg
++*.egg
++.eggs/
++
++# Installer logs
++pip-log.txt
++pip-delete-this-directory.txt
++
++# Pycharm project files
++.idea/
++
++# PyTest cache
++.pytest_cache/
++
++# Coverage
+ .coverage
+-
++coverage.xml
+ 
+-# dependencies
+-frontend/node_modules
+-/.pnp
+-.pnp.js
++# Tox
++.tox/
++.cache/
++.python-version
+ 
+-# testing
+-/coverage
++# VirtualEnv
++.venv/
+ 
+-
+-# production
+-/build
+-
+-# misc
++# Developers
++*.sw*
++manage.py
+ .DS_Store
+-.env.local
+-.env.development.local
+-.env.test.local
+-.env.production.local
+-
+-npm-debug.log*
+-yarn-debug.log*
+-yarn-error.log*
+ 
+-
+-!.github
+-!.gitignore
+-!.pre-commit-config.yaml
+\ No newline at end of file
++# example database
++drf_example
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"3d5e61e9-ceb4-466d-8191-8c0a69a228c2\" name=\"Changes\" comment=\"\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Script\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitSEFilterConfiguration\">\r\n    <file-type-list>\r\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\r\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\r\n      <filtered-out-file-type name=\"TAG\" />\r\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\r\n    </file-type-list>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1wo8ibVB2vNZLi8fLtPGnsokIAG\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/Library_API/manage.py\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"preferences.pluginManager\" />\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Python.manage\">\r\n    <configuration name=\"main\" type=\"PythonConfigurationType\" factoryName=\"Python\" nameIsGenerated=\"true\">\r\n      <module name=\"Library_v2\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/main.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"manage\" type=\"PythonConfigurationType\" factoryName=\"Python\" nameIsGenerated=\"true\">\r\n      <module name=\"Library_v2\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"C:\\Users\\frane\\.virtualenvs\\Library_v2-wiUw9WZk\\Scripts\\python.exe\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/Library_API\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/Library_API/manage.py\" />\r\n      <option name=\"PARAMETERS\" value=\"runserver\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Python.manage\" />\r\n      <item itemvalue=\"Python.main\" />\r\n    </list>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"3d5e61e9-ceb4-466d-8191-8c0a69a228c2\" name=\"Changes\" comment=\"\" />\r\n      <created>1629113708373</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1629113708373</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision bc94aaee8b943bddcded493d2dfd4f58a618b13e)
++++ b/.idea/workspace.xml	(date 1629809901540)
+@@ -1,7 +1,11 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="3d5e61e9-ceb4-466d-8191-8c0a69a228c2" name="Changes" comment="" />
++    <list default="true" id="3d5e61e9-ceb4-466d-8191-8c0a69a228c2" name="Changes" comment="">
++      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Library_API/API/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Library_API/API/views.py" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

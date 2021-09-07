@@ -1,6 +1,8 @@
 from rest_framework import viewsets, permissions
 from .serializers import CustomUserSerializer, ProfileSerializer
 from .models import CustomUser
+from rest_framework import status
+from rest_framework.response import Response
 
 
 #Permission for some methods
@@ -34,4 +36,14 @@ class UserViewSet(viewsets.ModelViewSet):
 
         self.serializer_class = ProfileSerializer
         return super(UserViewSet, self).retrieve(request)
+
+    def list(self, request, *args, **kwargs):
+        if request.user.is_staff:
+            return super(UserViewSet, self).list(request)
+
+        content = {
+            'Unauthorized': 'You are not authorized'
+        }
+
+        return Response(content, status=status.HTTP_401_UNAUTHORIZED)
 

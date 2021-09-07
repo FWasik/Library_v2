@@ -13,14 +13,6 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
         Token.objects.create(user=instance)
 
 
-def get_sentinel_deliverer():
-    return Deliverer.objects.get_or_create(name='Polish Post')[0]
-
-
-def get_sentinel_deliverer_id():
-    return get_sentinel_deliverer().id
-
-
 class Deliverer(models.Model):
     name = models.CharField(max_length=100)
 
