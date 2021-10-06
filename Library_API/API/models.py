@@ -61,6 +61,15 @@ class Book(models.Model):
         return self.title
 
 
+class Address(models.Model):
+    street = models.CharField(max_length=200)
+    number_of_building = models.CharField(max_length=5)
+    number_of_apartment = models.CharField(max_length=5, blank=True, null=True)
+    city = models.CharField(max_length=50)
+    state = models.CharField(max_length=50)
+    zip_code = models.CharField(max_length=6)
+
+
 class Order(models.Model):
     book = models.ManyToManyField(Book)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -68,6 +77,7 @@ class Order(models.Model):
     date_delivery = models.DateField(default=date.today() + timedelta(days=2), blank=True)
     rental_end = models.DateField(default=date.today() + timedelta(days=30), blank=True)
     deliverer = models.ForeignKey(Deliverer, on_delete=models.SET_NULL, blank=True, null=True)
+    address = models.ForeignKey(Address, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return f'Order number.' + str(self.id)

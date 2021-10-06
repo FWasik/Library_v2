@@ -1,9 +1,10 @@
 from rest_framework import viewsets, permissions
 from .models import (Author, Book, Order,
-                     Publisher, Genre, Deliverer)
+                     Publisher, Genre, Deliverer, Address)
 from .serializers import (AuthorSerializer, BookSerializer,
                           OrderSerializer, PublisherSerializer,
-                          GenreSerializer, DelivererSerializer)
+                          GenreSerializer, DelivererSerializer,
+                          AddressSerializer)
 from datetime import timedelta, date
 from django.utils import timezone
 from rest_framework import status
@@ -67,6 +68,11 @@ class BookViewSet(viewsets.ModelViewSet):
         return [permissions.AllowAny()]
 
 
+class AddressViewSet(viewsets.ModelViewSet):
+    serializer_class = AddressSerializer
+    queryset = Address.objects.all()
+
+
 class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
 
@@ -92,11 +98,11 @@ class OrderViewSet(viewsets.ModelViewSet):
         order.date_delivery = today + timedelta(days=2)
         order.rental_end = today + timedelta(days=30)
 
-        serializer = self.get_serializer(order, data=request.data,
-                                         partial=True)
+        #serializer = self.get_serializer(order, data=request.data,
+        #                                 partial=True)
 
-        serializer.is_valid()
-        serializer.save()
+        #serializer.is_valid()
+        #serializer.save()
 
         return super(OrderViewSet, self).partial_update(request)
 

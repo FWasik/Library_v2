@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from .models import (Order, Book, Author,
-                    Deliverer, Genre, Publisher)
+                     Deliverer, Genre, Publisher, Address)
+
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class PublisherSerializer(serializers.ModelSerializer):
@@ -41,10 +43,18 @@ class BookSerializer(serializers.ModelSerializer):
         return response
 
 
+class AddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        fields = '__all__'
+
+
 class OrderSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(
         read_only=True,
     )
+
+    address = AddressSerializer()
 
     class Meta:
         model = Order
@@ -69,3 +79,29 @@ class OrderSerializer(serializers.ModelSerializer):
                     raise serializers.ValidationError('Not enough books in library. Try again later.')
 
         return data
+
+    def create(self, validated_data):
+        address_data = validated_data.pop('address')
+        deliverer_data = validated_data.pop('deliverer')
+        book_data = validated_data.pop('book')
+        user_data = validated_data.pop('user')
+
+        try:
+            address = Address.objects.get(**address_data)
+        except ObjectDoesNotExist:
+            address = Address.objects.create(**address_data)
+
+        order = Order.objects.create(address=address, deliverer=deliverer_data, user=user_data)
+        order.book.add(*book_data)
+
+        return order
+
+    def update(self, instance, validated_data):
+        if 'address' in validated_data:
+            nested_serializer = self.fields['address']
+            nested_instance = instance.address
+            nested_data = validated_data.pop('address')
+
+            nested_serializer.update(nested_instance, nested_data)
+
+        return super(OrderSerializer, self).update(instance, validated_data)

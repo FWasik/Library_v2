@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Author, Book, Order, Publisher, Genre, Deliverer
+from .models import Author, Book, Order, Publisher, Genre, Deliverer, Address
 
 
 class IdShowAdmin(admin.ModelAdmin):
@@ -12,4 +12,4 @@ admin.site.register(Order)
 admin.site.register(Deliverer, IdShowAdmin)
 admin.site.register(Genre, IdShowAdmin)
 admin.site.register(Publisher, IdShowAdmin)
-
+admin.site.register(Address, IdShowAdmin)
