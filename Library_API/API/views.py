@@ -82,7 +82,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
 
     def get_permissions(self):
-        if self.request.method in ['GET', 'POST', 'DELETE', 'PATCH', 'PUT']:
+        if self.request.method in ['GET', 'POST', 'DELETE']:
             return [IsOwnerOrAdmin()]
         return [permissions.IsAuthenticated()]
 
@@ -106,38 +106,6 @@ class OrderViewSet(viewsets.ModelViewSet):
             book.save()
 
         return super(OrderViewSet, self).destroy(request)
-
-    def partial_update(self, request, *args, **kwargs):
-        order = self.get_object()
-        today = date.today()
-
-        diff = abs(today - order.date_order_create.date()).days
-
-        if diff > 1:
-            content = {
-                'Validation Error': 'Too late to update your order!'
-            }
-
-            return Response(content, status=status.HTTP_406_NOT_ACCEPTABLE)
-
-        order.date_order_create = timezone.now()
-        order.date_delivery = today + timedelta(days=2)
-        order.rental_end = today + timedelta(days=30)
-
-        serializer = self.get_serializer(order, data=request.data,
-                                         partial=True)
-
-        try:
-            serializer.is_valid()
-            serializer.save()
-        except AssertionError:
-            content = {
-                'Validation Error': 'Not enough books in library. Try again later.'
-            }
-
-            return Response(content, status=status.HTTP_406_NOT_ACCEPTABLE)
-
-        return Response(serializer.data)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

@@ -68,12 +68,6 @@ class OrderSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         if 'book' in data:
-            if self.instance:
-                books_order = Book.objects.filter(order=self.instance)
-                for book_order in books_order:
-                    book_order.amount += 1
-                    book_order.save()
-
             for book_in_order in data['book']:
                 book = Book.objects.get(pk=book_in_order.id)
 
@@ -82,7 +76,10 @@ class OrderSerializer(serializers.ModelSerializer):
                     book.save()
 
                 else:
-                    raise serializers.ValidationError()
+                    content = {
+                        "Validation error": "Not enough books in library! Try again later"
+                    }
+                    raise serializers.ValidationError(content)
 
         return data
 
@@ -101,30 +98,3 @@ class OrderSerializer(serializers.ModelSerializer):
         order.book.add(*book_data)
 
         return order
-
-    def update(self, instance, validated_data):
-        if 'address' in validated_data:
-            nested_serializer = self.fields['address']
-            nested_instance = instance.address
-            nested_data = validated_data.pop('address')
-
-            if self.instance == instance:
-                try:
-                    address = Address.objects.get(**nested_data)
-                except ObjectDoesNotExist:
-                    address = Address.objects.create(**nested_data)
-
-                address_original = instance.address
-                instance.address = address
-                instance.save()
-
-                orders = list(Order.objects.filter(address=address_original))
-
-                if not orders:
-                    address_original.delete()
-
-                return super(OrderSerializer, self).update(instance, validated_data)
-
-            nested_serializer.update(nested_instance, nested_data)
-
-        return super(OrderSerializer, self).update(instance, validated_data)
