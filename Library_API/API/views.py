@@ -104,11 +104,9 @@ class OrderViewSet(viewsets.ModelViewSet):
             return Response(content, status=status.HTTP_406_NOT_ACCEPTABLE)
 
         address = order.address
-        print(address)
+
         orders_temp = list(filter(lambda ord: ord != order, list(Order.objects.all())))
-        print(orders_temp)
         orders = list(filter(lambda order: order.address == address, orders_temp))
-        print(orders)
 
         if not orders:
             address.delete()
