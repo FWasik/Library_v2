@@ -82,9 +82,13 @@ class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
 
     def get_permissions(self):
-        if self.request.method in ['GET', 'POST', 'DELETE']:
+        if self.request.method in ['GET', 'DELETE']:
             return [IsOwnerOrAdmin()]
-        return [permissions.IsAuthenticated()]
+
+        if self.request.method == "POST":
+            return [permissions.IsAuthenticated()]
+
+        return [permissions.IsAdminUser()]
 
     def destroy(self, request, *args, **kwargs):
         order = self.get_object()
@@ -98,6 +102,16 @@ class OrderViewSet(viewsets.ModelViewSet):
             }
 
             return Response(content, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        address = order.address
+        print(address)
+        orders_temp = list(filter(lambda ord: ord != order, list(Order.objects.all())))
+        print(orders_temp)
+        orders = list(filter(lambda order: order.address == address, orders_temp))
+        print(orders)
+
+        if not orders:
+            address.delete()
 
         books = order.book.all()
 

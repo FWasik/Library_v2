@@ -42,7 +42,7 @@ class UserViewSet(viewsets.ModelViewSet):
             return super(UserViewSet, self).list(request)
 
         content = {
-            'Unauthorized': 'You are not authorized'
+            'Unauthorized': 'You are not authorized for that action'
         }
 
         return Response(content, status=status.HTTP_401_UNAUTHORIZED)

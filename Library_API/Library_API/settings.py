@@ -92,10 +92,18 @@ WSGI_APPLICATION = 'Library_API.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+import os
+
+library_db_pass = os.environ['LIBRARY_DB_PASS']
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'library',
+        'USER': 'FranekW',
+        'PASSWORD': library_db_pass,
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

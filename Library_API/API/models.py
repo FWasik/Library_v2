@@ -77,7 +77,7 @@ class Order(models.Model):
     date_delivery = models.DateField(default=date.today() + timedelta(days=2), blank=True)
     rental_end = models.DateField(default=date.today() + timedelta(days=30), blank=True)
     deliverer = models.ForeignKey(Deliverer, on_delete=models.SET_NULL, blank=True, null=True)
-    address = models.ForeignKey(Address, on_delete=models.CASCADE, blank=True, null=True)
+    address = models.ForeignKey(Address, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return f'Order number.' + str(self.id)

@@ -8,7 +8,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
                                   max_length=50)
     password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
     password1 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
-    middle_name = serializers.CharField(max_length=100, required=False, allow_null=True)
+    middle_name = serializers.CharField(max_length=100, required=False, allow_blank=True)
 
     def create(self, validated_data):
         content = ''
