@@ -72,6 +72,11 @@ class AddressViewSet(viewsets.ModelViewSet):
     serializer_class = AddressSerializer
     queryset = Address.objects.all()
 
+    def get_permissions(self):
+        if self.request.method in ['GET', 'POST', 'DELETE', 'PATCH', 'PUT']:
+            return [permissions.IsAdminUser()]
+        return [permissions.AllowAny()]
+
 
 class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
@@ -80,6 +85,27 @@ class OrderViewSet(viewsets.ModelViewSet):
         if self.request.method in ['GET', 'POST', 'DELETE', 'PATCH', 'PUT']:
             return [IsOwnerOrAdmin()]
         return [permissions.IsAuthenticated()]
+
+    def destroy(self, request, *args, **kwargs):
+        order = self.get_object()
+        today = date.today()
+
+        diff = abs(today - order.date_order_create.date()).days
+
+        if diff > 1:
+            content = {
+                "Error": "Too late to delete order!"
+            }
+
+            return Response(content, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        books = order.book.all()
+
+        for book in books:
+            book.amount += 1
+            book.save()
+
+        return super(OrderViewSet, self).destroy(request)
 
     def partial_update(self, request, *args, **kwargs):
         order = self.get_object()
@@ -98,13 +124,20 @@ class OrderViewSet(viewsets.ModelViewSet):
         order.date_delivery = today + timedelta(days=2)
         order.rental_end = today + timedelta(days=30)
 
-        #serializer = self.get_serializer(order, data=request.data,
-        #                                 partial=True)
+        serializer = self.get_serializer(order, data=request.data,
+                                         partial=True)
 
-        #serializer.is_valid()
-        #serializer.save()
+        try:
+            serializer.is_valid()
+            serializer.save()
+        except AssertionError:
+            content = {
+                'Validation Error': 'Not enough books in library. Try again later.'
+            }
 
-        return super(OrderViewSet, self).partial_update(request)
+            return Response(content, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        return Response(serializer.data)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
