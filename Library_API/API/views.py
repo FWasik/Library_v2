@@ -96,10 +96,8 @@ class OrderViewSet(viewsets.ModelViewSet):
 
         diff = abs(today - order.date_order_create.date()).days
 
-        if diff > 1:
-            content = {
-                "Error": "Too late to delete order!"
-            }
+        if diff > 1 and not permissions.IsAdminUser():
+            content = "Błąd! Za późno na anulowanie zamówienia! Skontaktuj się z adminem!"
 
             return Response(content, status=status.HTTP_406_NOT_ACCEPTABLE)
 
