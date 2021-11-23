@@ -32,10 +32,10 @@ COPY --from=builder /usr/src/app/wheels /wheels
 COPY --from=builder /usr/src/app/requirements.txt .
 RUN pip install --no-cache /wheels/*
 
+COPY . .
+
 COPY ./entrypoint.sh /home/library_backend/entrypoint.sh
 RUN chmod +x /home/library_backend/entrypoint.sh
-
-COPY . .
 
 RUN chown -R library_backend /home/library_backend
 
