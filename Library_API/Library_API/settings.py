@@ -112,7 +112,7 @@ DATABASES = {}
 
 if database_url:
     db_from_env = dj_database_url.config(default=database_url, conn_max_age=500)
-    DATABASES['default'].upadate(db_from_env)
+    DATABASES['default'].update(db_from_env)
 
 else:
     library_db_pass = os.environ.get('LIBRARY_DB_PASS', '')
