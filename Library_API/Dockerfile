@@ -24,7 +24,7 @@ RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requir
 FROM python:3.7.12-slim-buster
 
 RUN useradd --create-home library_backend
-WORKDIR /home/backend
+WORKDIR /home/library_backend
 RUN mkdir /home/library_backend/static
 RUN mkdir /home/library_backend/media
 
@@ -37,12 +37,12 @@ RUN chmod +x /home/library_backend/entrypoint.sh
 
 COPY . .
 
-RUN chown -R backend /home/library_backend
+RUN chown -R library_backend /home/library_backend
 
 RUN python manage.py collectstatic --noinput
 
-USER backend
+USER library_backend
 
 ENTRYPOINT ["/home/library_backend/entrypoint.sh"]
 
-CMD gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT
+CMD gunicorn Library_API.wsgi:application --bind 0.0.0.0:$PORT
