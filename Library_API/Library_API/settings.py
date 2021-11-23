@@ -114,7 +114,7 @@ if database_url:
     DATABASES['default'].upadate(db_from_env)
 
 else:
-    library_db_pass = os.environ['LIBRARY_DB_PASS']
+    library_db_pass = os.environ.get('LIBRARY_DB_PASS', '')
 
     DATABASES = {
         'default': {
