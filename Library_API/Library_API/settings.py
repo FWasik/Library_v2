@@ -104,19 +104,27 @@ WSGI_APPLICATION = 'Library_API.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 import os
+import dj_database_url
 
 library_db_pass = os.environ['LIBRARY_DB_PASS']
+database_url = os.environ.get('DATABASE_URL', None)
+DATABASES = {}
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'library',
-        'USER': 'FranekW',
-        'PASSWORD': library_db_pass,
-        'HOST': 'localhost',
-        'PORT': '5432',
+if database_url:
+    db_from_env = dj_database_url.config(default=database_url, conn_max_age=500)
+    DATABASES['default'].upadate(db_from_env)
+
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'library',
+            'USER': 'FranekW',
+            'PASSWORD': library_db_pass,
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
     }
-}
 
 
 # Password validation
