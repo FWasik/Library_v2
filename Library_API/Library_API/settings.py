@@ -106,7 +106,6 @@ WSGI_APPLICATION = 'Library_API.wsgi.application'
 import os
 import dj_database_url
 
-library_db_pass = os.environ['LIBRARY_DB_PASS']
 database_url = os.environ.get('DATABASE_URL', None)
 DATABASES = {}
 
@@ -115,6 +114,8 @@ if database_url:
     DATABASES['default'].upadate(db_from_env)
 
 else:
+    library_db_pass = os.environ['LIBRARY_DB_PASS']
+
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
