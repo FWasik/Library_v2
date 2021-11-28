@@ -77,7 +77,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
                 else:
                     content = {
-                        "Validation error": "Not enough books in library! Try again later"
+                        'Validation_error': 'Brak książki ' + book.title + '!'
                     }
                     raise serializers.ValidationError(content)
 

@@ -16,6 +16,4 @@ class CustomUser(AbstractUser):
                                                                "@[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?"
                                                                "(\.[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?)+$",
                                                          message="Zły format emailu: email@email")])
-    image = models.ImageField(upload_to='profile_pics/', blank=True, default='default.jpg')
-
-
+    image = models.ImageField(upload_to='profile_pics/', null=True, default='default.jpg')

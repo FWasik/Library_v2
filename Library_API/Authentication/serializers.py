@@ -53,6 +53,9 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
         password = validated_data.pop('password', None)
 
+        if validated_data.__contains__('image'):
+            instance.image.delete()
+
         for (key, value) in validated_data.items():
             setattr(instance, key, value)
 

@@ -3,6 +3,7 @@ from .serializers import CustomUserSerializer#, ProfileSerializer
 from .models import CustomUser
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser, FormParser
 
 
 #Permission for some methods
@@ -15,6 +16,8 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
     lookup_field = 'username'
+
+    parser_classes = (MultiPartParser, FormParser)
 
     def get_permissions(self):
         if self.request.method == 'POST':
