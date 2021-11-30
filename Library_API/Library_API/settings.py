@@ -42,9 +42,7 @@ INSTALLED_APPS = [
     'API',
     'Authentication',
     'rest_framework',
-    #'rest_framework.authtoken',
     'corsheaders',
-    #'rest_framework_simplejwt.token_blacklist',
 ]
 
 AUTH_USER_MODEL = 'Authentication.CustomUser'
@@ -105,7 +103,6 @@ WSGI_APPLICATION = 'Library_API.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-import datetime
 import os
 import dj_database_url
 
@@ -162,7 +159,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Warsaw'
 
 USE_I18N = True
 

@@ -5,8 +5,7 @@ from .serializers import (AuthorSerializer, BookSerializer,
                           OrderSerializer, PublisherSerializer,
                           GenreSerializer, DelivererSerializer,
                           AddressSerializer)
-from datetime import timedelta, date
-from django.utils import timezone
+from datetime import date
 from rest_framework import status
 from rest_framework.response import Response
 
@@ -15,7 +14,6 @@ from rest_framework.response import Response
 class IsOwnerOrAdmin(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         return obj.user == request.user or request.user.is_staff
-
 
 
 class AuthorViewSet(viewsets.ModelViewSet):

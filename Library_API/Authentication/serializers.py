@@ -3,11 +3,15 @@ from .models import CustomUser
 from django.core.validators import RegexValidator
 
 
+validator_password = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$"
+
+
 class CustomUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(style={'input_type': 'password'}, write_only=True,
-                                     validators=[RegexValidator(regex="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$",
+                                     validators=[RegexValidator(regex=validator_password,
                                                                 message="Zły format hasła!")])
     password1 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
+    old_password = serializers.CharField(style={'input_type': 'password'}, write_only=True, required=False)
     middle_name = serializers.CharField(max_length=100, required=False, allow_blank=True)
 
     class Meta:
@@ -19,8 +23,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
         if validated_data['password'] == validated_data['password1']:
             try:
-                #username = validated_data['username']
-
                 user = CustomUser.objects.create_user(
                     username=validated_data['username'],
                     email=validated_data['email'],
@@ -31,44 +33,42 @@ class CustomUserSerializer(serializers.ModelSerializer):
                     middle_name=validated_data['middle_name'],
                     last_name=validated_data['last_name']
                 )
-                #user = CustomUser.objects.get_by_natural_key(username)
-                #Token.objects.create(user=user)
+
                 user.save()
 
                 return user
 
             except KeyError:
-                content = {
-                    'Validation error': 'All required fields must be filled!'
-                }
+                raise serializers.ValidationError({
+                    'Validation error': ['Wszystkie potrzebne pola muszą być wypełnione!']
+                })
 
-                raise serializers.ValidationError(content)
-
-        content = {
-            'Validation error': 'Passwords not match'
-        }
-        raise serializers.ValidationError(content)
+        raise serializers.ValidationError({
+            'Validation error': ['Hasła nie pasują!']
+        })
 
     def update(self, instance, validated_data):
 
-        password = validated_data.pop('password', None)
+        if validated_data.__contains__('password'):
+            if validated_data['password'] != validated_data['password1']:
+                raise serializers.ValidationError({'Validation error': ['Hasła nie pasują!']})
 
-        if validated_data.__contains__('image'):
-            instance.image.delete()
+            user = instance
+            if not user.check_password(validated_data['old_password']):
+                raise serializers.ValidationError({'Validation error': ['Niepoprawne stare hasło']})
 
-        for (key, value) in validated_data.items():
-            setattr(instance, key, value)
+            instance.set_password(validated_data['password'])
+            instance.save()
 
-        if password is not None:
-            instance.set_password(password)
+            return instance
 
-        instance.save()
+        else:
+            if validated_data.__contains__('image') and not instance.image.name == 'default.jpg':
+                instance.image.delete()
 
-        return instance
+            for (key, value) in validated_data.items():
+                setattr(instance, key, value)
 
-'''
-class ProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CustomUser
-        fields = ['username', 'first_name', 'middle_name', 'last_name']
-'''
+            instance.save()
+
+            return instance
