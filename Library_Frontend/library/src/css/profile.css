@@ -1,0 +1,104 @@
+.profile.container {
+    width: 80%;
+    border-radius: 0.5rem;
+    padding: 6vh 0;
+    background-color:rgb(204, 204, 204, 0.85);
+    box-shadow: 0 0 3em black;
+    display: flex;
+    opacity: 0;
+    animation: fadeIn 1.5s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+
+
+.profile.container .container{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 2vh;
+    display: block;
+
+}
+
+.profile-info.container {
+    border-right-style: solid;
+    padding: 0 5vw;
+}
+
+.profile-info.container .container .row {
+    text-align: left;
+    margin: 3.5vh 0;
+}
+
+
+.profile-update.container {
+    padding: 0 5vw;
+}
+
+.profile-update.container input {
+    font-size: 1rem;
+}
+
+.profile-update .btn.btn-primary, .profile-update .btn.btn-secondary{
+    margin: 2vh 1vw;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;  
+    padding: 0.5em;
+    width: 35%;
+}
+
+.profile-update.container .col .container {
+    display: inline;
+}
+
+
+/*Spinner*/
+.profile.container .container .spinner-border {
+    width: 5vw; 
+    height: 5vw;
+    border-width: 0.5vw;  
+}
+
+.profile.container img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 2vh;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .profile.container .container .spinner-border {
+        width: 10vw; 
+        height: 10vw;
+        border-width: 1vw;
+    }
+
+    .profile.container {
+        display: block;
+    }
+
+    .profile-info.container {
+        border-right-style: none;
+        border-bottom-style: solid;
+        padding-bottom: 5vh;
+    }
+
+    .profile-update.container {
+        padding-top: 5vh;
+    }
+
+    .container-button-main .btn.btn-secondary {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .profile.container .container .spinner-border {
+        width: 12vw; 
+        height: 12vw;
+        border-width: 1.2vw;
+    }
+
+} 

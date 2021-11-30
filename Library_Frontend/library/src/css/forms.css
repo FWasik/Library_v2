@@ -1,0 +1,195 @@
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.background {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 12vh 0;
+    min-height: 60vh;
+    /*background: #363945*/
+
+    /*background-color: rgb(33,37,41, 0.8);*/
+    /*background-image: linear-gradient(rgba(33,37,41), rgb(137, 137, 137), rgba(33,37,41))*/
+    /*background: url('process.env.PUBLIC_URL + /images/library.jpg'); background-size: cover; width: 100%;*/
+}
+.container.login, .container.register {
+    width: 50%;
+    border-radius: 0.5rem;
+    padding: 6vh 8vw;
+    display: block;
+    background-color:rgb(204, 204, 204, 0.85);
+    box-shadow: 0 0 3em black;
+
+    opacity: 0;
+    animation: fadeIn 1.5s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+.container.login{
+    width: 45%;
+}
+
+
+
+.background .register .container {
+    text-align: center;
+}
+
+form .form-label {
+    display:inline;
+}
+
+.form-floating {
+    margin-top: 2vh;
+}
+
+.form-floating input {
+    font-size: 1rem;
+}
+
+.banner {
+    text-align: center;
+}
+
+.banner.col h1 {
+    font-size: 3rem;       
+}
+
+/*.container-button-main, .container{
+    display: flex;
+    justify-content: center;
+}*/
+
+.row .col form .container {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.login.container .container {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.btn.btn-primary, .btn.btn-secondary{
+    margin: 4vh 0;
+    background: black;
+    border: 0.5px white;
+    border-radius: 0.5rem;
+    font-size: 1.4rem;  
+    padding: 0.7em;
+    width: 60%;
+}
+
+.btn.btn-primary:hover, .btn.btn-primary:focus, .btn.btn-secondary:hover, .btn.btn-secondary:focus{
+    background: white;
+    border: 0.5px black;
+    color: black;
+    box-shadow:none !important;
+}
+
+.background hr {
+    margin: 0;
+}
+
+.col a {
+    text-decoration: none;
+    color: #fff
+}
+
+.col a:hover {
+    color: #000
+}
+
+
+.btn.btn-secondary {
+    background: rgb(80, 2, 214);
+}
+
+
+/*SELECTS*/
+
+.css-1s2u09g-control, .css-1pahdxg-control, .css-1s2u09g-control:hover, .css-1pahdxg-control:hover {
+    padding: 0.5rem;
+}
+
+/*.css-1rhbuit-multiValue {
+    font-size: 1rem;
+}*/
+
+
+.col .container.container-pass {
+    background-color:rgba(79, 220, 251, 0.5);
+    border-radius: 0.5rem;
+    border-style: solid;
+    margin-top: 3vh;
+    padding: 2vh;
+    text-align: left!important;
+    display: block!important;
+}
+
+.col .container ul li {
+    font-size: 0.9rem;
+}
+
+
+
+#__react-alert__ div div div {
+   
+    width: 40vw!important;
+    height: 20vh!important;
+    
+    font-size: 1.4rem!important;
+}
+
+
+@media screen and (max-width: 1300px) {
+
+    .background {
+        padding: 10vh 4vw;
+    }
+
+
+    .container.login, .container.register, .container.login {
+        width: 65%;
+    }
+
+    .container .spinner-border {
+        width: 8vw; 
+        height: 8vw; 
+        border-width: 0.6vw; 
+    }
+
+    .form-floating input {
+        font-size: 1rem;
+    }
+
+
+    .btn.btn-primary, .btn.btn-secondary{
+        font-size: 1rem;  
+    }
+    
+    #__react-alert__ div div div span {
+        font-size: 1rem!important;
+    }
+    
+}
+
+@media screen and (max-width: 850px) {
+
+    .banner.col h1 {
+        font-size: 2.3rem;       
+    }
+
+    .container.login, .container.register, .container.login{
+        width: 80%;
+    }
+}
+
+
+
