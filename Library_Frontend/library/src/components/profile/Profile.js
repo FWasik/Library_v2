@@ -122,7 +122,7 @@ const Profile = () => {
                         }
 
                         else {
-                            alert.error('Zarejestrowano użytkownika o takiej nazwie użytkownika, PESEL, nr. telefonu bądź emailu!')
+                            alert.error('Zarejestrowano użytkownika o takiej nazwie użytkownika, PESEL, nr.telefonu bądź emailu!')
                         }
                     })
                 }
