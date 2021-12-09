@@ -94,3 +94,9 @@ a.btn.btn-light:hover {
         border-radius: 0;
     }
 }
+
+@media screen and (max-width: 480px) {
+    nav .navbar-brand {
+        display: none;
+    }
+}

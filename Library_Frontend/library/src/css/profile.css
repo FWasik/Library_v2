@@ -89,7 +89,7 @@
         padding-top: 5vh;
     }
 
-    .container-button-main .btn.btn-secondary {
+    .profile-update .btn.btn-primary, .profile-update .btn.btn-secondary{
         font-size: 1rem;
     }
 }
@@ -99,6 +99,10 @@
         width: 12vw; 
         height: 12vw;
         border-width: 1.2vw;
+    }
+
+    .profile-update .btn.btn-primary, .profile-update .btn.btn-secondary {
+        font-size: 0.85rem;
     }
 
 } 

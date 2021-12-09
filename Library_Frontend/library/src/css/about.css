@@ -39,7 +39,6 @@
 }
 
 .container.carousel {
-    height: 120vh;
     text-align: center;
     justify-content: center;
     flex-direction: column;
@@ -63,12 +62,14 @@
 
 .carousel-caption p {
     margin-top: 5vh;
-    margin-bottom: 10vh;
+    margin-bottom: 5vh;
     font-size: 2.2vh;
+    height: 20vh;
 }
 
 .carousel .carousel-caption {
-    position: static;
+    position: sticky;
+    margin-top: 5vh;
 }
 
 .carousel.slide .carousel-indicators button {
@@ -113,8 +114,10 @@
 
 
 @media screen and (max-width: 780px) {
-    .container.caroBack {
-        height: 180vh;
+    .carousel-caption p {
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+        height: 30vh;
     }
 }
 
@@ -126,9 +129,11 @@
         margin-bottom: 10vh;
     }
 
-    .container.caroBack {
-        height: 200vh;
+    .carousel-caption p {
+        height: 35vh;
     }
+
+    
 
     .container.caroBack .container .spinner-border {
         width: 12vw; 
@@ -139,18 +144,13 @@
 }
 
 @media screen and (max-width: 500px) {
-    .container.caroBack {
-        height: 220vh;
+    .carousel-caption p {
+        height: 45vh;
     }
 }
 
-
 @media screen and (max-width: 400px) {
-    .container.caroBack {
-        height: 240vh;
-    }
-
-    .container.caroBack h1 {
-        margin-bottom: 20vh;
+    .carousel-caption p {
+        height: 55vh;
     }
 }

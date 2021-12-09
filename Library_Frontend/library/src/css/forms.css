@@ -189,6 +189,14 @@ form .form-label {
     .container.login, .container.register, .container.login{
         width: 80%;
     }
+
+    .btn.btn-primary, .btn.btn-secondary{
+        font-size: 0.9rem;  
+    }
+
+    .form-floating label {
+        font-size: 0.9rem;
+    }
 }
 
 
