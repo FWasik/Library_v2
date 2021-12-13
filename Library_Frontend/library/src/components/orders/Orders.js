@@ -14,6 +14,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css'
 const Orders = () => {
     
     const [orders, setOrders] = useState([])
+
     var orderToDelete = useRef(null)
     const [loading, setLoading] = useState(false)
     const alert = useAlert()
@@ -30,11 +31,11 @@ const Orders = () => {
                                 <h1>Potwierdzenie</h1>
                                     <h5>Na pewno chcesz usunąć zamówienie?</h5>
                                 <div className="react-confirm-alert-button-group" style={{justifyContent:"center"}}>
-                                    <Button variant="danger" onClick={onClose} id='confirm_no'>
+                                    <Button onClick={onClose} id='confirm_no'>
                                         Anuluj
                                     </Button>
 
-                                    <Button id='confirm_yes' onClick={ () => { 
+                                    <Button variant="danger" id='confirm_yes' onClick={ () => { 
                                                                                 deleteOrder( orderToDelete.id)
                                                                                 
                                                                                 onClose()
@@ -69,6 +70,7 @@ const Orders = () => {
             .then((res) => {
                 //console.log(res.data)
                 setOrders(res.data)
+
                 setTimeout( () => {
                     setLoading(false)
                 }, 2000)
@@ -124,14 +126,15 @@ const Orders = () => {
                                         <Table striped bordered hover responsive variant="dark">
                                         <thead>
                                             <tr>
-                                                <th scope="col"style={{width: "2%"}}>ID: </th>
-                                                <th id='separator' scope="col"style={{width: "11%"}}>Ksiązki / Autorzy: </th>
+                                                <th scope="col" style={{width: "2%"}}>ID: </th>
+                                                <th id='separator' scope="col"style={{width: "17%"}}>Ksiązka/i</th>
+                                                <th id='separator' scope="col"style={{width: "17%"}}>Autor/zy</th>
                                                 
-                                                <th scope="col"style={{width: "18%"}}>Data utworzenia wyp.: </th>
-                                                <th scope="col"style={{width: "15%"}}>Data dostarczenia: </th>
-                                                <th scope="col"style={{width: "15%"}}>Data końca wyp.:</th>
-                                                <th scope="col"style={{width: "10%"}}>Dostawca: </th>
-                                                <th scope="col"style={{width: "23%"}}>Adres:</th>
+                                                <th scope="col"style={{width: "15%"}}>Data utworzenia wyp.: </th>
+                                                <th scope="col"style={{width: "11%"}}>Data dostarczenia: </th>
+                                                <th scope="col"style={{width: "11%"}}>Data końca wyp.:</th>
+                                                <th scope="col"style={{width: "8%"}}>Dostawca: </th>
+                                                <th scope="col"style={{width: "20%"}}>Adres:</th>
                                                 <th scope="col"style={{width: "8%"}}>Akcja</th>
                                             </tr>
                                         </thead>
@@ -141,31 +144,43 @@ const Orders = () => {
                                                 orders.map(order => (
                                                 <tr key={order.id}>
                                                     <td> {order.id} </td>
-
-                                                    {
-                                                        order.book.map(book => (
-                                                                    <tr id="booksAuthors">
-                                                                        <td>
-                                                                            <td> {book.title}  </td>
-                                                                            <br/>
-                                                                            <td id='separator'> / </td> 
-                                                                            <br/>
+                                                    
+                                                    <td>
+                                                        {
+                                                            order.book.map(book => (
+                                                                        <tr >
                                                                             
+                                                                                {book.title} 
+                                                                                <br/>
+                                                                                <br/>
+                                                                                <br/>
+                                                                        </tr>
+                                                                    
+                                                            ))    
+                                                        } 
+                                                    </td>
+
+                                                    <td>
+                                                        {
+                                                            order.book.map(book => (
+                                                                        <tr>
                                                                             {
                                                                                 book.author.map(author => (
                                                                                     <tr>
                                                                                         <td> {author.first_name} { author.middle_name} {author.last_name} </td>
-                                                                                        
+                                                                                        <br/>
+                                                                                        <br/>
+                                                                                        <br/>
                                                                                     </tr>
                                                                                 ))
                                                                             }
-                                                                            
-                                                                            <hr/>
-                                                                        </td>
-                                                                    </tr>
-                                                                
-                                                        ))    
-                                                    } 
+                                                                        </tr>
+                                                                    
+                                                            ))    
+                                                        } 
+                                                    </td>
+
+                                                    
 
                                                     <td> {order.date_order_create} </td>
                                                     <td> {order.date_delivery} </td>

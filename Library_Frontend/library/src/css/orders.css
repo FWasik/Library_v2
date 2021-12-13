@@ -1,6 +1,9 @@
 .backgroundOrders {
-    padding: 12vh 14vw;
+    padding: 10vh 4vw;
     min-height: 60vh;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
 span {
@@ -14,11 +17,15 @@ span {
     display: flex;
     background-color: rgb(220, 220, 220, 0.9);
     font-size: 0.9rem;
-
+    
     opacity: 0;
     animation: fadeIn 1.5s;
     animation-delay: 0.5s;
     animation-fill-mode: forwards;
+}
+
+.card.card-body table {
+    width: 80vw;
 }
 
 .card.card-body .container{
@@ -41,28 +48,13 @@ span {
 
 
 
-
-#booksAuthors {
-    height: 8vh;
-}
-
-#separator {
-    width: 10vw;
-}
-
 #button {
+    display: table-cell;
     text-align: center;
+    vertical-align: middle;
 }
 
 
-
-
-
-
-.btn.btn.btn-danger:hover {
-    background-color: white;
-    color: red;
-}
 
 #confirm_yes, #confirm_no {
     width: 40%;
@@ -71,20 +63,30 @@ span {
     
     font-size: 1.2rem;
 }
-#confirm_no {
+#confirm_yes {
     background: red;
     color:white;
     font-size: 1.2rem;
+    border: 2px solid red;
+}
+
+#confirm_yes:hover, .btn.btn.btn-danger:hover  {
+    background: white;
+    color:red;
 }
 
 #confirm_no:hover {
-    background: white;
-    color:red;
+    background-color: white;
+    color: black;
+    border: 2px solid black;
 }
 
 
 @media screen and (max-width: 1320px) {
 
+    .card.card-body table {
+        width: auto;
+    }
     .card.card-body {
         display:block;
     }

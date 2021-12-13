@@ -1,5 +1,5 @@
 import React from 'react'
-import '../css/about.css'
+import '../css/books.css'
 import { Container, Carousel, Spinner, Image, Row, Col } from 'react-bootstrap'
 
 import Alerts from "./Alerts"
@@ -7,7 +7,7 @@ import {useState, useEffect} from 'react'
 import axiosInstance from '../axios'
 import '../css/forms.css'
 
-const About = () => {
+const Books = () => {
 
     const [books, setBooks] = useState([])
     const [loading, setLoading] = useState(false)
@@ -158,4 +158,4 @@ const About = () => {
     )
 }
 
-export default About
+export default Books

@@ -82,7 +82,7 @@ const Header = () => {
                     
                 </Nav>
                 <Nav>
-                    <Nav.Link href='/about'>Książki</Nav.Link>
+                    <Nav.Link href='/books'>Książki</Nav.Link>
 
                     {isAuth === true ? (
                         <Fragment>

@@ -11,14 +11,15 @@ import NotFound from './components/NotFound'
 import Profile from './components/profile/Profile'
 import Orders from './components/orders/Orders'
 import AddOrder from './components/orders/AddOrder'
+import Books from './components/Books'
+import PasswordUpdate from './components/profile/PasswordUpdate'
 
 import './App.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 import AlertTemplate from 'react-alert-template-basic'
 import {transitions, positions, Provider as AlertProvider} from 'react-alert'
-import About from './components/About'
-import PasswordUpdate from './components/profile/PasswordUpdate'
+
 
 
 
@@ -45,7 +46,7 @@ function App() {
           <Switch>
             <Route exact path='/' component={Home}/>
 
-            <Route exact path='/about' component={About}/>
+            <Route exact path='/books' component={Books}/>
 
             <ProtectedRoute exact path='/register' component={Register}/>
               
