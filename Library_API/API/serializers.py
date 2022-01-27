@@ -94,7 +94,9 @@ class OrderSerializer(serializers.ModelSerializer):
         except ObjectDoesNotExist:
             address = Address.objects.create(**address_data)
 
-        order = Order.objects.create(address=address, deliverer=deliverer_data, user=user_data)
+        order = Order.objects.create(address=address,
+                                     deliverer=deliverer_data,
+                                     user=user_data)
         order.book.add(*book_data)
 
         return order

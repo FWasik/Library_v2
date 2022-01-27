@@ -57,17 +57,33 @@ class Book(models.Model):
 
 class Address(models.Model):
     street = models.CharField(max_length=100,
-                              validators=[RegexValidator(regex='^[a-zA-ZŻŹĆĄŚĘŃŁÓżźćąśęńłó -]{1,100}$', message='Zły format ulicy: Tylko litery')])
+                              validators=[RegexValidator(
+                                  regex='^[a-zA-ZŻŹĆĄŚĘŃŁÓżźćąśęńłó -]{1,100}$',
+                                  message='Zły format ulicy: Tylko litery')])
+
     number_of_building = models.CharField(max_length=5,
-                                          validators=[RegexValidator(regex='^[0-9]{1,5}$', message='Zły format nr. budynku: tylko cyfry XXXXX')])
+                                          validators=[RegexValidator(
+                                              regex='^[0-9]{1,5}$',
+                                              message='Zły format nr. budynku: tylko cyfry XXXXX')])
+
     number_of_apartment = models.CharField(max_length=5, blank=True,
-                                           validators=[RegexValidator(regex='^[0-9]{1,5}$', message='Zły format nr. lokalu: tylko cyfry XXXXX')])
+                                           validators=[RegexValidator(
+                                               regex='^[0-9]{1,5}$',
+                                               message='Zły format nr. lokalu: tylko cyfry XXXXX')])
+
     city = models.CharField(max_length=100,
-                            validators=[RegexValidator(regex='^[a-zA-ZŻŹĆĄŚĘŃŁÓżźćąśęńłó -]{1,100}$', message='Zły format miasta: Tylko litery')])
+                            validators=[RegexValidator(
+                                regex='^[a-zA-ZŻŹĆĄŚĘŃŁÓżźćąśęńłó -]{1,100}$',
+                                message='Zły format miasta: Tylko litery')])
+
     state = models.CharField(max_length=100,
-                             validators=[RegexValidator(regex='^[a-zA-ZŻŹĆĄŚĘŃŁÓżźćąśęńłó -]{1,100}$', message='Zły format powiaty: Tylko litery')])
+                             validators=[RegexValidator(
+                                 regex='^[a-zA-ZŻŹĆĄŚĘŃŁÓżźćąśęńłó -]{1,100}$',
+                                 message='Zły format powiaty: Tylko litery')])
     zip_code = models.CharField(max_length=6,
-                                validators=[RegexValidator(regex="^\d{2}-\d{3}$", message="Zły format kodu pocztowego: XX-XXX (cyfry)")])
+                                validators=[RegexValidator(
+                                    regex="^\d{2}-\d{3}$",
+                                    message="Zły format kodu pocztowego: XX-XXX (cyfry)")])
 
 
 class Order(models.Model):

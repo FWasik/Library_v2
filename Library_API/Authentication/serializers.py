@@ -13,6 +13,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
     password1 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
     old_password = serializers.CharField(style={'input_type': 'password'}, write_only=True, required=False)
     middle_name = serializers.CharField(max_length=100, required=False, allow_blank=True)
+    is_staff = serializers.BooleanField(required=False, default=False)
 
     class Meta:
         model = CustomUser
@@ -31,7 +32,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
                     phone_number=validated_data['phone_number'],
                     first_name=validated_data['first_name'],
                     middle_name=validated_data['middle_name'],
-                    last_name=validated_data['last_name']
+                    last_name=validated_data['last_name'],
+                    is_staff=validated_data['is_staff']
                 )
 
                 user.save()

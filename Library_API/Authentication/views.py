@@ -17,43 +17,36 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = CustomUserSerializer
     lookup_field = 'username'
 
-    parser_classes = (MultiPartParser, FormParser)
+    parser_classes = (MultiPartParser, FormParser,)
 
     def get_permissions(self):
         if self.request.method == 'POST':
             return [permissions.AllowAny()]
 
-        if self.request.method in ['DELETE', 'PATCH', 'PUT']:
+        if self.request.method in ['DELETE', 'PATCH', 'PUT', 'GET']:
             return [IsOwnerOrAdmin()]
 
-        if self.request.method == 'GET':
-            return [permissions.IsAuthenticated()]
-
         return [permissions.IsAdminUser()]
-
-    def retrieve(self, request, *args, **kwargs):
-        is_owner = self.get_object()
-
-        if is_owner == request.user or request.user.is_staff:
-            return super(UserViewSet, self).retrieve(request)
-
-        content = {
-            'Unauthorized': 'You are not authorized for that action'
-        }
-
-        return Response(content, status=status.HTTP_401_UNAUTHORIZED)
 
     def list(self, request, *args, **kwargs):
         if request.user.is_staff:
             return super(UserViewSet, self).list(request)
 
         content = {
-            'Unauthorized': 'You are not authorized for that action'
+            'Unauthorized': 'Brak autoryzacji!'
         }
 
         return Response(content, status=status.HTTP_401_UNAUTHORIZED)
 
-    def update(self, request, *args, **kwargs):
+    def destroy(self, request, *args, **kwargs):
+        user = request.user
+
+        if not user.image.name == 'default.jpg':
+            user.image.delete()
+
+        return super(UserViewSet, self).destroy(request)
+
+    def partial_update(self, request, *args, **kwargs):
         serializer = self.serializer_class(request.user, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
