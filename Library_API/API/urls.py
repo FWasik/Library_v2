@@ -1,6 +1,7 @@
 from rest_framework import routers
 from .views import (AuthorViewSet, BookViewSet, OrderViewSet,
-                    PublisherViewSet, GenreViewSet, DelivererViewSet)
+                    PublisherViewSet, GenreViewSet, DelivererViewSet,
+                    AddressViewSet)
 
 app_name = 'API'
 
@@ -11,5 +12,6 @@ router.register('orders', OrderViewSet, basename='orders')
 router.register('publishers', PublisherViewSet, basename='publishers')
 router.register('genres', GenreViewSet, basename='genres')
 router.register('deliverers', DelivererViewSet, basename='deliverers')
+router.register('addresses', AddressViewSet, basename='addresses')
 
 urlpatterns = router.urls

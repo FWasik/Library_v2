@@ -8,12 +8,13 @@ from django.urls import reverse
 
 from django.test.client import MULTIPART_CONTENT, encode_multipart, BOUNDARY
 
-class APICustomUserTestCase(APITestCase):
-    url_detail = reverse('Authentication:users-detail', kwargs={'username': 'TestUser1'})
-    url_list = reverse('Authentication:users-list')
+user_url_detail = reverse('Authentication:users-detail', kwargs={'username': 'TestUser1'})
+user_url_list = reverse('Authentication:users-list')
 
+
+class APICustomUserTestCase(APITestCase):
     def create_user_test(self):
-        self.assertEqual(self.url_list, '/api/auth/users/')
+        self.assertEqual(user_url_list, '/api/auth/users/')
 
         data = {'username': 'TestUser1', 'first_name': 'Test', 'middle_name': '',
                 'last_name': 'User', 'is_staff': True, 'email': 'TestUser1@email.com',
@@ -25,7 +26,7 @@ class APICustomUserTestCase(APITestCase):
                                     content_type=MULTIPART_CONTENT)
         '''
 
-        response = self.client.post(self.url_list, data, format='multipart')
+        response = self.client.post(user_url_list, data, format='multipart')
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
@@ -46,11 +47,12 @@ class APICustomUserTestCase(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION=f'JWT {token}')
 
         #retrieve
-        self.assertEqual(self.url_detail, '/api/auth/users/TestUser1/')
+        self.assertEqual(user_url_detail, '/api/auth/users/TestUser1/')
 
-        response = self.client.get(self.url_detail)
+        response = self.client.get(user_url_detail)
 
-        print(response.json())
+        # print(response.json())
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         #list
@@ -59,11 +61,11 @@ class APICustomUserTestCase(APITestCase):
                 'PESEL': '22222222222', 'phone_number': '222222222',
                 'password': 'TestUser2!', 'password1': 'TestUser2!'}
 
-        self.client.post(self.url_list, data, format='multipart')
+        self.client.post(user_url_list, data, format='multipart')
 
-        response = self.client.get(self.url_list)
+        response = self.client.get(user_url_list)
 
-        print(response.json())
+        # print(response.json())
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -71,11 +73,11 @@ class APICustomUserTestCase(APITestCase):
         token = self.auth_user_test()
         self.client.credentials(HTTP_AUTHORIZATION=f'JWT {token}')
 
-        self.assertEqual(self.url_detail, '/api/auth/users/TestUser1/')
+        self.assertEqual(user_url_detail, '/api/auth/users/TestUser1/')
 
-        response = self.client.patch(self.url_detail, {'middle_name': '1'}, format='multipart')
+        response = self.client.patch(user_url_detail, {'middle_name': '1'}, format='multipart')
 
-        print(response.json())
+        # print(response.json())
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -83,8 +85,8 @@ class APICustomUserTestCase(APITestCase):
         token = self.auth_user_test()
         self.client.credentials(HTTP_AUTHORIZATION=f'JWT {token}')
 
-        self.assertEqual(self.url_detail, '/api/auth/users/TestUser1/')
+        self.assertEqual(user_url_detail, '/api/auth/users/TestUser1/')
 
-        response = self.client.delete(self.url_detail)
+        response = self.client.delete(user_url_detail)
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
