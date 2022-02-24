@@ -72,8 +72,7 @@ const Register = () => {
                         const str = data[key][0]
                         console.log(str)
                         if(str.includes("Zły format") || str.includes("Hasła")) {
-                            alert.error(str)
-                            
+                            alert.error(str)                   
                         }
 
                         else if(str.includes("username")) {
