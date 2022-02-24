@@ -37,7 +37,7 @@ const Books = () => {
             <div style={{background:`url(${process.env.PUBLIC_URL + '/images/library.jpg'})`, backgroundSize: "cover", width: "100%"}}>
                 
 
-                <Container className='caroBack'>
+                <div className='caroBack'>
                 
                     {
                         loading === true ? 
@@ -152,7 +152,7 @@ const Books = () => {
                             </Container>
                         </> 
                     } 
-                </Container>
+                </div>
             </div>
         </>
     )

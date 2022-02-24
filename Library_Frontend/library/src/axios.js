@@ -12,7 +12,6 @@ else
 	
 const axiosInstance = axios.create({
 	baseURL: baseURL,
-	timeout: 500,
 	headers: {
 		Authorization: localStorage.getItem('access_token')
 			? 'JWT ' + localStorage.getItem('access_token')

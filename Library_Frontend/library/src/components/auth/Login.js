@@ -37,14 +37,12 @@ const Login = () => {
         axiosInstance
             .post("token/", body)
             .then((res) => {
-                //console.log(JSON.stringify(res.data))
                 localStorage.setItem('access_token', res.data.access)
                 localStorage.setItem('refresh_token', res.data.refresh)
                 localStorage.setItem('username', user.username)
                 axiosInstance.defaults.headers['Authorization'] =
                 'JWT ' + localStorage.getItem('access_token')
 
-                //console.log(localStorage.getItem("username"))
                 history.push('/')
                 alert.success(`Zalogowano jako ${localStorage.getItem('username')}!`) 
             })

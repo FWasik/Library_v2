@@ -40,14 +40,6 @@ const Header = () => {
                 var jwtPayload = JSON.parse(window.atob(token.split('.')[1]))
                 const expiration = new Date(jwtPayload.exp * 1000);
                 const now = new Date();
-                //const fiveMinutes = 1000 * 60 * 1;
-    
-                //console.log(expiration)
-                //console.log(now)
-                //console.log(expiration.getTime())
-                //console.log(now.getTime())
-                //console.log(expiration.getTime() - now.getTime())
-                
                 if(expiration.getTime() - now.getTime() <= 0) {
                     localStorage.clear()  
                     alert.error('Sesja wygasła! Zaloguj się ponownie!')

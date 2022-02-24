@@ -68,12 +68,11 @@ const Orders = () => {
         axiosInstance
             .get("orders/")
             .then((res) => {
-                //console.log(res.data)
                 setOrders(res.data)
 
                 setTimeout( () => {
                     setLoading(false)
-                }, 2000)
+                }, 2500)
                 
             })
             .catch((err) => {
@@ -93,9 +92,7 @@ const Orders = () => {
             })
             .catch((err) => {
                 const error = err.response.data
-                console.log(error)
-                if (error === "Błąd! Za późno na anulowanie zamówienia! Skontaktuj się z adminem!")
-                    alert.error(error)
+                alert.error(error)
             })
     }
 

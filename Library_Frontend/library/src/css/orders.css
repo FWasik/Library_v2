@@ -18,6 +18,8 @@ span {
     background-color: rgb(220, 220, 220, 0.9);
     font-size: 0.9rem;
     
+    padding: 6vh 2vw 6vh 2vw;
+    
     opacity: 0;
     animation: fadeIn 1.5s;
     animation-delay: 0.5s;
@@ -34,11 +36,13 @@ span {
     display: flex;
 }
 
-.card.card-body .container .spinner-border {
-    width: 5vw; 
-    height: 5vw; 
-    border-width: 0.5vw; 
+.container .spinner-border {
+    width: 5rem; 
+    height: 5rem; 
+    border-width: 0.4rem;
+    text-align: center; 
 }
+
 
 .card.card-body h1 {
     margin-top: 2vh;
@@ -91,12 +95,6 @@ span {
         display:block;
     }
 
-    .container .spinner-border {
-        width: 8vw;
-        height: 8vw; 
-        border-width: 0.6vw; 
-    }
-
     span {
         font-size: 1.4rem;
     }
@@ -123,13 +121,6 @@ span {
         padding: 12vh 4vw;
         min-height: 60vh;
     }
-
-    .card.card-body .container .spinner-border {
-        width: 10vw; 
-        height: 10vw; 
-        border-width: 1vw; 
-    }
-    
 }
 
 @media screen and (max-width: 750px) {
@@ -145,10 +136,3 @@ span {
     
 }
 
-@media screen and (max-width: 600px) {
-    .card.card-body .container .spinner-border {
-        width: 12vw; 
-        height: 12vw; 
-        border-width: 1.2vw; 
-    }
-} 

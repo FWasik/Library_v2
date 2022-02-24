@@ -73,10 +73,22 @@ const Register = () => {
                         console.log(str)
                         if(str.includes("Zły format") || str.includes("Hasła")) {
                             alert.error(str)
+                            
                         }
 
-                        else {
-                            alert.error('Zarejestrowano użytkownika o takiej nazwie użytkownika, PESEL bądź emailu!')
+                        else if(str.includes("username")) {
+                            alert.error('Użytkownik o podanej nazwie już istnieje!')
+
+                        }
+
+                        else if(str.includes("PESEL")) {
+                            alert.error('Użytkownik o podanym numerze PESEL już istnieje!')
+
+                        }
+
+                        else if(str.includes("email")) {
+                            alert.error('Użytkownik o podanej adresie email już istnieje!')
+
                         }
                     })
                 }   

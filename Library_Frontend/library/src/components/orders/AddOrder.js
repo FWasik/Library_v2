@@ -19,8 +19,6 @@ const AddOrder = () => {
     const [books, setBooks] = useState([])
     const [deliverers, setDeliverers] = useState()
 
-
-
     const [selectedDeliverer, setSetelectedDeliverer] = useState(null)
     const [selectedBooks, setSetelectedBooks] = useState([])
 
@@ -116,28 +114,6 @@ const AddOrder = () => {
 
 
     const onSubmit = (e) => {
-        //console.log(address)
-        //console.log(selectedBooks)
-        //console.log(selectedDeliverer)
-
-        //console.log(address.number_of_building)
-
-        /*
-        if(!regex.zip_code.test(address.zip_code)) {
-            alert.error('Nieprawidłowy format kodu pocztowego (XX-XXX)!')
-        }
-
-        if(!regex.number_of_building.test(address.number_of_building) || address.number_of_building === '0') {
-            alert.error('Nieprawidłowy format numeru budynku (do 5 cyfr)')
-        }
-
-        if( address.number_of_apartment !== '' && (!regex.number_of_apartment.test(address.number_of_apartment) || address.number_of_apartment === '0')) {
-            alert.error('Nieprawidłowy format numeru budynku (do 5 cyfr)')
-        }
-        */
-
-        //console.log(selectedBooks) 
-
         if(selectedBooks.length === 0 || selectedDeliverer === null) {
             alert.error('Opcje wyboru nie mogą być puste!')
         }
@@ -228,11 +204,11 @@ const AddOrder = () => {
                                             size="lg"
                                             type="text"
                                             name="number_of_apartment"
-                                            placeholder="Numer mieszkania*"
+                                            placeholder="Numer mieszkania (opcjonalnie)"
                                             value={address.number_of_apartment}
                                             onChange={onChange}
                                         />
-                                        <label htmlFor="floatingInputCustom">Numer mieszkania*</label>
+                                        <label htmlFor="floatingInputCustom">Numer mieszkania (opcjonalnie)</label>
                                     </Form.Floating>
                                 </Form.Group>
 

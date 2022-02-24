@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import { Form, Row, Button, Col, Container, Spinner, Image} from 'react-bootstrap'
 import '../../css/profile.css'
 
@@ -8,13 +8,47 @@ import { useAlert } from 'react-alert'
 import Alerts from "../Alerts"
 import axiosInstance from '../../axios';
 
-
+import { confirmAlert } from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 const Profile = () => {
+
+    const options = { 
+        customUI: ({ onClose }) => {
+            return (
+                <div id="react-confirm-alert">
+                    <div className="react-confirm-alert-overlay overlay-custom-class-name">
+                        <div className="react-confirm-alert">
+                            <div className="react-confirm-alert-body" style={{textAlign: "center"}}>
+                                <h1>Potwierdzenie</h1>
+                                    <h5>Na pewno chcesz usunąć konto?</h5>
+                                <div className="react-confirm-alert-button-group" style={{justifyContent:"center"}}>
+                                    <Button onClick={onClose} id='confirm_no'>
+                                        Anuluj
+                                    </Button>
+
+                                    <Button variant="danger" id='confirm_yes' onClick={ () => { 
+                                                                                deleteUser()
+                                                                                
+                                                                                onClose()
+                                                                                }
+                                                                                
+                                                                            }
+                                                                        
+                                        >Tak</Button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+    }
 
     const alert = useAlert()
     const history = useHistory()
 
+    var userToDelete = useRef(null)
     const [userInfo, setUserInfo] = useState([])
     const [loading, setLoading] = useState(false)
     const [image, setImage] = useState(null)
@@ -31,23 +65,15 @@ const Profile = () => {
     
     useEffect(() => {
         setLoading(true)
-        axiosInstance
-        .get(`auth/users/${localStorage.getItem('username')}/`)
-        .then((res) => {
-            updateFormData(res.data);
-            setTimeout( () => {
-                setLoading(false)
-            }, 2500)
-        })
-        .catch((err) => {
-            console.log(err.message)
-        })
-
+        
         axiosInstance    
             .get(`auth/users/${localStorage.getItem('username')}/`)
             .then((res) => {
-                console.log(res.data)
                 setUserInfo(res.data)
+
+                updateFormData(res.data)
+
+
                 setTimeout( () => {
                     setLoading(false)
                 }, 2500)
@@ -55,7 +81,21 @@ const Profile = () => {
             .catch((err) => {
                 console.log(err.message)        
             })
-    }, [updateFormData, alert, history]);
+    }, [setUserInfo, updateFormData, alert, history]);
+
+
+    const deleteUser = () => {
+        axiosInstance
+            .delete(`/auth/users/${localStorage.getItem("username")}/`)
+            .then( () => {
+                localStorage.clear()
+                alert.success(`Usunięto konto!`)
+                history.push('/')
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
 
 
     const handleImage = (e) => {
@@ -66,7 +106,12 @@ const Profile = () => {
     const onChange = (e) =>
         updateFormData({...formData, [e.target.name]: e.target.value });
 
-
+    
+    const onClick = (user) => {
+        userToDelete = user
+        
+        confirmAlert(options)
+    }
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -101,7 +146,7 @@ const Profile = () => {
                 alert.success(`Zaktualizowano informacje o użytkowniku ${localStorage.getItem('username')}!`)
                 setTimeout( () => {    
                     history.go(`/${localStorage.getItem('username')}`)
-                }, 1500)
+                }, 3000)
             })
             .catch((err) => {
                 console.log(err.response.status)
@@ -219,6 +264,17 @@ const Profile = () => {
                                         </Col>
                                     </Row>
 
+                                    <Container>
+                                        <Button
+                                            variant="danger"
+                                            type="submit"
+                                            onClick={() => onClick()}
+                                        >
+                                            Usuń konto
+                                        </Button>
+
+                                    </Container>
+
                                 </Container>
                             
                             </Container>
@@ -229,6 +285,9 @@ const Profile = () => {
                                         <h1>Aktualizacja</h1>
                                     </Col>
                                 </Row>
+
+                                <hr />
+
                                 <Col>
                                     <Form onSubmit={onSubmit}>
 

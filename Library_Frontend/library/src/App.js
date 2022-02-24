@@ -25,7 +25,7 @@ import {transitions, positions, Provider as AlertProvider} from 'react-alert'
 
 
 const options = {
-    timeout: 6000,
+    timeout: 3000,
     position: positions.TOP_CENTER,
     offset: "12rem",
     transition: transitions.SCALE
