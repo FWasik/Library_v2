@@ -144,7 +144,7 @@ const Profile = () => {
                 alert.success(`Zaktualizowano informacje o użytkowniku ${localStorage.getItem('username')}!`)
                 setTimeout( () => {    
                     history.go(`/${localStorage.getItem('username')}`)
-                }, 3000000)
+                }, 3000)
             })
             .catch((err) => {
                 console.log(err.response.status)
