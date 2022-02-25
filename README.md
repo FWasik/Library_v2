@@ -7,9 +7,9 @@
 * [Screenshots](#screenshots)
 
 ## General info
-My first "big app". Virtual Library, web application which provides system to handle library orders (create, delete, read). App 
-also provides system of authorization and authentication users (also with CRUD), both given by JWT
-(djangorestframewokr-simplejwt package). Apps uses PostgreSQL. Images are stored on Cloudinary.
+My first "big app". Virtual Library, a web application for handling library orders (create, delete, read).
+The application also provides a user authorization and authentication system (also with CRUD). 
+Both provided by JWT. The application uses PostgreSQL. Images are stored on Cloudinary.
 
 You can use app here:   
 https://virtual-library-webapp.herokuapp.com/
