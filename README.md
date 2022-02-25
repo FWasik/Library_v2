@@ -1,4 +1,4 @@
-# ChessApp
+# Library_v2 (Virtual Library)
 
 ## Table of contents
 * [General info](#general-info)
