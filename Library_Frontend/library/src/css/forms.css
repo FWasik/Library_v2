@@ -159,12 +159,6 @@ form .form-label {
         width: 65%;
     }
 
-    .container .spinner-border {
-        width: 8vw; 
-        height: 8vw; 
-        border-width: 0.6vw; 
-    }
-
     .form-floating input {
         font-size: 1rem;
     }
@@ -198,6 +192,14 @@ form .form-label {
         font-size: 0.9rem;
     }
 }
+
+@media screen and (max-width: 450px) {
+    .container.login, .container.register {
+        width: 100%;
+        margin: 10vh 0;
+        
+    }
+} 
 
 
 

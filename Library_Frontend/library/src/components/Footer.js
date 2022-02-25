@@ -48,7 +48,7 @@ const Footer = () => {
 
                 <div className="col-12 text-center">
                     <NavDropdown.Divider />
-                    <h5>&copy; FW 2021</h5>
+                    <h5>&copy; FW 2022</h5>
                     <NavDropdown.Divider />
                 </div>
             </div>

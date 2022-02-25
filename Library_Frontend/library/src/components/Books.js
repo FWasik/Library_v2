@@ -126,7 +126,7 @@ const Books = () => {
                                                             </Col>
 
                                                             <Col sm={7}>
-                                                                {book.year_of_realease}
+                                                                {book.year_of_release}
                                                             </Col>
                                                         </Row>
 

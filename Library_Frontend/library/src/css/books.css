@@ -7,9 +7,9 @@
 }
 
 .container .spinner-border {
-    width: 5rem; 
-    height: 5rem; 
-    border-width: 0.4rem;
+    width: 10vh; 
+    height: 10vh; 
+    border-width: 1vh;
     text-align: center; 
 }
 
@@ -111,7 +111,7 @@
         height: 15vh;
     }
 
-    .container .row .col-sm-7 h3{
+    .container .row .col-sm-7 h3 {
         width: 40vw;
     }
     
@@ -144,4 +144,43 @@
     }
 
     
+}
+
+@media screen and (max-width: 600px) {
+    .container .spinner-border {
+        width: 8vh; 
+        height: 8vh; 
+        border-width: 0.8vh; 
+    }
+
+    .container .row .col-sm-5, .container .row .col-sm-7 {
+        text-align: center;
+    }
+
+    .container .row .col-sm-7 h3 {
+        width: 100%;
+    }
+
+    .carousel-caption p {
+        height: 35vh;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .carousel-caption p {
+        height: 45vh;
+    }
+
+    .container .spinner-border {
+        width: 5vh; 
+        height: 5vh; 
+        border-width: 0.8vh; 
+    }
+
+}
+
+@media screen and (max-width: 380px) {
+    .carousel-caption p {
+        height: 60vh;
+    }
 }

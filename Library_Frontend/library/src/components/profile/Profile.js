@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Form, Row, Button, Col, Container, Spinner, Image} from 'react-bootstrap'
 import '../../css/profile.css'
 
@@ -48,7 +48,6 @@ const Profile = () => {
     const alert = useAlert()
     const history = useHistory()
 
-    var userToDelete = useRef(null)
     const [userInfo, setUserInfo] = useState([])
     const [loading, setLoading] = useState(false)
     const [image, setImage] = useState(null)
@@ -107,9 +106,7 @@ const Profile = () => {
         updateFormData({...formData, [e.target.name]: e.target.value });
 
     
-    const onClick = (user) => {
-        userToDelete = user
-        
+    const onClick = () => {
         confirmAlert(options)
     }
 
