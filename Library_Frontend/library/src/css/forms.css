@@ -139,15 +139,6 @@ form .form-label {
 
 
 
-#__react-alert__ div div div {
-   
-    width: 40vw!important;
-    height: 20vh!important;
-    
-    font-size: 1.4rem!important;
-}
-
-
 @media screen and (max-width: 1300px) {
 
     .background {
@@ -168,9 +159,7 @@ form .form-label {
         font-size: 1rem;  
     }
     
-    #__react-alert__ div div div span {
-        font-size: 1rem!important;
-    }
+   
     
 }
 

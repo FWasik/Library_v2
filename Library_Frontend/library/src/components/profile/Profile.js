@@ -11,6 +11,7 @@ import axiosInstance from '../../axios';
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 
+
 const Profile = () => {
 
     const options = { 
@@ -143,7 +144,7 @@ const Profile = () => {
                 alert.success(`Zaktualizowano informacje o użytkowniku ${localStorage.getItem('username')}!`)
                 setTimeout( () => {    
                     history.go(`/${localStorage.getItem('username')}`)
-                }, 3000)
+                }, 3000000)
             })
             .catch((err) => {
                 console.log(err.response.status)

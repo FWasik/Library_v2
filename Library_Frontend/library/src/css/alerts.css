@@ -1,32 +1,32 @@
 #__react-alert__ div div div {
     text-align: center;
-    width: 25rem!important;
-    height: 10rem!important;
-    font-size: 1.5rem!important;
- }
+    width: 40vw!important;
+    height: 20vh!important;
+    font-size: 1.4rem!important;
+}
+
 
 
  @media screen and (max-width: 1300px) {
     #__react-alert__ div div div {
-        width: 20rem!important;
-        height: 6rem!important;
+        width: 30rem!important;
+        height: 12rem!important;
         font-size: 1.2rem!important;
     }
 }
 
 @media screen and (max-width: 760px) {
     #__react-alert__ div div div {
-        width: 18rem!important;
-        height: 6rem!important;
-        font-size: 1rem!important;
+        width: 25rem!important;
+        height: 10rem!important;
+        font-size: 1.1rem!important;
     }
 }
 
 @media screen and (max-width: 528px) {
     #__react-alert__ div div div {
-        width: 15rem!important;
-        height: 4rem!important;
-        font-size: 0.8rem!important;
-        margin: 3rem;
+        width: 20rem!important;
+        height: 8rem!important;
+        font-size: 0.85rem!important;
     }
 }
