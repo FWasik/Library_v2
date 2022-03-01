@@ -116,6 +116,8 @@
     .profile-update .btn.btn-primary, .profile-update .btn.btn-secondary, .profile-info.container .btn.btn-danger{
         margin: 2vh 2.5vh;
     }
+
+    
 } 
 
 @media screen and (max-width: 600px) {

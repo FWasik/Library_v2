@@ -181,6 +181,17 @@
 
 @media screen and (max-width: 380px) {
     .carousel-caption p {
-        height: 60vh;
+        height: 50vh;
     }
 }
+
+@media screen and (max-width: 340px) {
+    .carousel-caption p {
+        height: 70vh;
+    }
+
+    .caroBack {
+        font-size: 80%;
+    }
+}
+
