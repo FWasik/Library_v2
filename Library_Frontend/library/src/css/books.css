@@ -168,7 +168,7 @@
 
 @media screen and (max-width: 450px) {
     .carousel-caption p {
-        height: 45vh;
+        height: auto;
     }
 
     .container .spinner-border {
@@ -180,16 +180,14 @@
 }
 
 @media screen and (max-width: 380px) {
-    .carousel-caption p {
-        height: 50vh;
+    .caroBack h1 {
+        margin: 5vh;
+        font-size: 2rem;
     }
+    
 }
 
 @media screen and (max-width: 340px) {
-    .carousel-caption p {
-        height: 70vh;
-    }
-
     .caroBack {
         font-size: 80%;
     }
