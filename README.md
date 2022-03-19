@@ -62,7 +62,7 @@ py manage.py test Authentication.tests.{class_to_test}.{method_to_test}
 
 
 
-###Run
+### Run
 Running application (backend):
 ```
 py manage.py runserver
