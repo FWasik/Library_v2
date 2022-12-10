@@ -20,7 +20,6 @@ Both provided by JWT. The application uses PostgreSQL. Images are stored on Clou
 * React.js: 17.0.2
 * PostgreSQL: 13.2
 * Docker
-* Heroku platform
 * Cloudinary (for image storage)
 
 
