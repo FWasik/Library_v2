@@ -11,12 +11,6 @@ My first "big app". Virtual Library, a web application for handling library orde
 The application also provides a user authorization and authentication system (also with CRUD). 
 Both provided by JWT. The application uses PostgreSQL. Images are stored on Cloudinary.
 
-You can use app here:   
-https://virtual-library-webapp.herokuapp.com/
-
-WARNING!    
-Sometimes (usually at the end of month) free dynos on Heroku platform are ran out what causes the page
-does not work. With new month, free dynos are restored.
 
 ## Technologies
 * Python: 3.9.2
